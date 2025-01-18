@@ -11,12 +11,14 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import About from "./About"; // Import the About page
 import FaceIcon from "@mui/icons-material/Face";
 import SpeedIcon from "@mui/icons-material/Speed";
 import SecurityIcon from "@mui/icons-material/Security";
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 
-function App() {
+function Home() {
   const theme = useTheme();
 
   return (
@@ -102,7 +104,11 @@ function App() {
                 size="large"
                 sx={{
                   px: 4,
-                  width: { xs: "100%", sm: "auto" }, // Full width on extra-small screens
+                  backgroundColor: "primary.main",
+                  "&:hover": {
+                    backgroundColor: "primary.dark",
+                  },
+                  transition: "all 0.3s ease",
                 }}
               >
                 Login
@@ -110,9 +116,17 @@ function App() {
               <Button
                 variant="outlined"
                 size="large"
+                component={Link}
+                to="/about" // React Router navigation
                 sx={{
                   px: 4,
-                  width: { xs: "100%", sm: "auto" }, // Full width on extra-small screens
+                  borderColor: "primary.main",
+                  color: "primary.main",
+                  "&:hover": {
+                    borderColor: "primary.dark",
+                    color: "primary.dark",
+                  },
+                  transition: "all 0.3s ease",
                 }}
               >
                 About
@@ -186,6 +200,17 @@ function App() {
         </Typography>
       </Box>
     </Box>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Router>
   );
 }
 
